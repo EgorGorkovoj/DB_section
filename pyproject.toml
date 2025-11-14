@@ -1,0 +1,11 @@
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+extend-select = ["Q"]
+
+[tool.ruff.format]
+quote-style = "single"
+line-length = 79
+indent-style = "space"
+line-ending = "auto"
