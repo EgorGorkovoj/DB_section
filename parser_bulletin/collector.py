@@ -45,7 +45,6 @@ class BulletinCollector:
 
             page_number += 1
             next_page_url = self.page_url + f'?page=page-{page_number}'
-            print(next_page_url)
 
         return results
 

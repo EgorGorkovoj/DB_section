@@ -21,7 +21,6 @@ def main():
         url.PAGE_URL, response, extractor, start_date, end_date
     )
     links = collector.collect()
-    print(links)
     downloader = XMLFileDownloader(DOWNLOADS_DIR, response)
     downloaded_files = []
     for link, date in links:
@@ -32,7 +31,6 @@ def main():
     with SessionLocal() as session:
         importer = SpimexImporter(session)
         for file_path, file_date in downloaded_files:
-            print(file_path)
             extractor = MetricTonTableExtractor(file_path)
             df = extractor.extract()
             importer.save_table_bulk(df, file_date=file_date)
