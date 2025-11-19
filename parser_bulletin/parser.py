@@ -4,6 +4,9 @@ from typing import Generator, TypeAlias
 
 from bs4 import BeautifulSoup, Tag
 
+from core.logger import logger
+
+
 Link_generator: TypeAlias = Generator[tuple[str, datetime.date], None, None]
 
 
@@ -51,5 +54,5 @@ class BulletinLinkExtractor(LinkExtractor):
         try:
             return datetime.datetime.strptime(date_in_href, '%Y%m%d').date()
         except Exception as e:
-            # TODO Добавить логер!
+            logger.info(f'Не получилось получить время: {e}.')
             return None
