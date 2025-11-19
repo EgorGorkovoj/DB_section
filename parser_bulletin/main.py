@@ -3,9 +3,9 @@ from parser import BulletinLinkExtractor
 
 from collector import BulletinCollector
 from core.config import DOWNLOADS_DIR, url
+from core.db_depends import SessionLocal
 from file_loader import XMLFileDownloader
 from page_load import RequestPageLoader
-from core.db_depends import SessionLocal
 from services.importer_db import SpimexImporter
 from xml_extract.xml_data import MetricTonTableExtractor
 
@@ -17,7 +17,9 @@ def main():
 
     response = RequestPageLoader()
     extractor = BulletinLinkExtractor(url.SITE_URL)
-    collector = BulletinCollector(url.PAGE_URL, response, extractor, start_date, end_date)
+    collector = BulletinCollector(
+        url.PAGE_URL, response, extractor, start_date, end_date
+    )
     links = collector.collect()
     print(links)
     downloader = XMLFileDownloader(DOWNLOADS_DIR, response)

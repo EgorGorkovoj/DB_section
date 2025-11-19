@@ -3,9 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Generator, TypeAlias
 
 from bs4 import BeautifulSoup, Tag
-
 from core.logger import logger
-
 
 Link_generator: TypeAlias = Generator[tuple[str, datetime.date], None, None]
 
@@ -38,7 +36,9 @@ class BulletinLinkExtractor(LinkExtractor):
             if not file_date:
                 continue
 
-            full_url = href if href.startswith('http') else f'{self.base_url}{href}'
+            full_url = (
+                href if href.startswith('http') else f'{self.base_url}{href}'
+            )
             yield full_url, file_date
 
     def _extcract_links(self, soup: BeautifulSoup) -> list[Tag]:
